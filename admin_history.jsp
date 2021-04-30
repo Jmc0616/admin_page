@@ -36,9 +36,7 @@
             String dbPwd = "tpdlvmEld!!@@";
              
             conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPwd);
-             
             pstmt = conn.prepareStatement("select * from user_manage_log");
-             
             rs = pstmt.executeQuery();
              
             while(rs.next()){
