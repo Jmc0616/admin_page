@@ -14,6 +14,7 @@
         String dbUser = "safethings";
         String dbPwd = "tpdlvmEld!!@@";
         
+        
         conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPwd);
         
         pstmt = conn.prepareStatement("delete from users where id =" + id);
@@ -27,5 +28,5 @@
     catch(Exception e){
         e.printStackTrace();
     }
-    response.sendRedirect("admin_main.jsp");
+    // response.sendRedirect("admin_main.jsp");
 %>

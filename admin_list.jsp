@@ -20,12 +20,12 @@ function showdetail() { window.open("admin_detail.jsp", "a", "width=800, height=
 <body>
 <caption>사용자 목록</caption>
 <input type="button" value="사용자 생성" onclick="showPopup();"/>
-<table width="70%" border="1">
+<table width="50%" border="1">
 <tr>
 </tr> 
 <thead>
     <tr>
-        <th>아이디</th><th>권한</th><th>설명</th>
+        <th>아이디</th><th>설명</th>
         <TD>기능</TD>
     </tr>
 </thead>
@@ -40,7 +40,7 @@ function showdetail() { window.open("admin_detail.jsp", "a", "width=800, height=
             String jdbcDriver = "jdbc:mysql://localhost/safethings";
             String dbUser = "safethings";
             String dbPwd = "tpdlvmEld!!@@";
-             
+        
             conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPwd);
             pstmt = conn.prepareStatement("select * from users");
             rs = pstmt.executeQuery();
@@ -50,12 +50,10 @@ function showdetail() { window.open("admin_detail.jsp", "a", "width=800, height=
     
         <tr>
             <td><%= rs.getString("id") %></td>
-            <td><%= rs.getString("privilege") %></td>
             <td><%= rs.getString("description") %></td>
         
         <TD>
-        <input type="button" value="상세 정보" onclick="location.href='admin_detail.jsp?id=<%=rs.getString("id")%>'"/>
-        <A href="admin_delete.jsp?id=<%=rs.getString("id")%>">삭제</A>
+        <input type="button" value="상세 정보" onclick="window.open('admin_detail.jsp?id=<%=rs.getString("id")%>')"/>
         </TD>
         </tr>
         
