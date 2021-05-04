@@ -3,4 +3,4 @@
 
 <jsp:include page="admin_list.jsp" flush="false"/>
 <jsp:include page="admin_history.jsp" flush="false"/>
-<jsp:include page="admin_detail.jsp" flush="false"/>
+<jsp:include page="admin_detail.jsp" flush="ture"/>

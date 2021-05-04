@@ -20,6 +20,8 @@ function showdetail() { window.open("admin_detail.jsp", "a", "width=800, height=
 <body>
 <caption>사용자 목록</caption>
 <input type="button" value="사용자 생성" onclick="showPopup();"/>
+<input type="button" value="로그아웃" onclick="location.href='../../main.jsp'"/>
+
 <table width="50%" border="1">
 <tr>
 </tr> 

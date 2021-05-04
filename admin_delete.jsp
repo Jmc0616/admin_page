@@ -17,12 +17,12 @@
         
         conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPwd);
         
-        pstmt = conn.prepareStatement("delete from users where id =" + id);
+        pstmt = conn.prepareStatement("delete from users where id ='"+id+"'");
         re = pstmt.executeQuery();
 
+        re.close();
         pstmt.close();
         conn.close();
-        re.close();
         
     }
     catch(Exception e){

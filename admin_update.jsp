@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
     import="java.sql.*"%>
-<%@page import="java.sql.SQLException"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.Connection"%>
-
 <%
     Class.forName("org.mariadb.jdbc.Driver");
     Connection conn=null; 
@@ -26,7 +20,7 @@
         
         conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPwd);
 
-        String sql = "update users set password=?, privilege=?, description=?, timeput=?, access_ip=? where id=?";
+        String sql = "update users set password=?, privilege=?, description=?, timeout=?, access_ip=? where id=?";
         
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1,password);
@@ -35,17 +29,17 @@
 		pstmt.setString(4,timeout);
 		pstmt.setString(5,access_ip);
         pstmt.setString(6,id);
-        out.println(pstmt);
 
-        re = pstmt.executeQuery();
+        pstmt.executeUpdate();
 
         pstmt.close();
         conn.close();
-        re.close();
+        
 
     }
 
     catch(Exception e){
-        e.printStackTrace();
+		out.print("Exception Error...");
+		out.print(e.toString());
     }
 %>

@@ -26,7 +26,7 @@
         
         conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPwd);
         
-        pstmt = conn.prepareStatement("select* from users where id =" + id);
+        pstmt = conn.prepareStatement("select* from users where id ='"+id+"'");
         rs = pstmt.executeQuery(); 
 
         while(rs.next()){
@@ -34,7 +34,7 @@
             <A href="admin_delete.jsp?id=<%=rs.getString("id")%>">제거</A>
             
             <form name="update" action="admin_update.jsp" method="post">
-            <input type="submit" value="수정"> 
+            <input type="submit" value="수정">
 
             <table width="30%" border="1">
             <tr><td>최종 수정일 </td><td> <%= rs.getString("mod_date") %></td></tr>
@@ -62,7 +62,8 @@
         
     }
     catch(Exception e){
-        e.printStackTrace();
+       	out.print("Exception Error...");
+		out.print(e.toString());
     }
     // response.sendRedirect("admin_main.jsp");
 %>
