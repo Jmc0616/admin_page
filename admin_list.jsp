@@ -8,23 +8,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>사용자 목록</title>
-
-<title>Document</title>
-<script language="javascript">
-function showPopup() { window.open("admin_join.jsp", "a", "width=400, height=300, left=100, top=50"); }
-function showdetail() { window.open("admin_detail.jsp", "a", "width=800, height=600, left=100, top=50"); }
-
-</script>
 </head>
 <body>
-<caption>사용자 목록</caption>
-<input type="button" value="사용자 생성" onclick="showPopup();"/>
-<input type="button" value="로그아웃" onclick="location.href='../../main.jsp'"/>
-
 <table width="50%" border="1">
-<tr>
-</tr> 
 <thead>
     <tr>
         <th>아이디</th><th>설명</th>

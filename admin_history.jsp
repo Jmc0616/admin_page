@@ -9,11 +9,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>all history</title>
-
-<title>Document</title>
 </head> 
 <body>
-<caption>users history</caption>
 <table width="100%" border="1">
     <thead>
         <tr>
