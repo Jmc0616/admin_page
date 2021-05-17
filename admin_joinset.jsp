@@ -15,14 +15,17 @@
 
 	SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
 	Date currentTime = new Date ();
-	String mTime = mSimpleDateFormat.format(currentTime);
+
+	String date = mSimpleDateFormat.format(currentTime);
+	String par = (String)session.getAttribute("id");
+
 	String id = request.getParameter("id");
 	String password = request.getParameter("password");
 	String privilege = request.getParameter("privilege");
 	String description = request.getParameter("description");
 	String timeout = request.getParameter("timeout");
 	String access_ip = request.getParameter("access_ip");
-	String par = (String)session.getAttribute("id");
+	
 
 	String PW = password;
 	MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -44,17 +47,17 @@
 		pstmt.setString(4,description);
 		pstmt.setString(5,timeout);
 		pstmt.setString(6,access_ip);
-		pstmt.setString(7,mTime);	
-		pstmt.setString(8,mTime);
+		pstmt.setString(7,date);	
+		pstmt.setString(8,date);
 		pstmt.setString(9,par);
 
 		re = pstmt.executeQuery();
 		
 		pstmt=conn.prepareStatement("INSERT INTO user_manage_log (mod_date, modified_by, modified_id, modified_content) VALUES (?, ?, ?, ?)");
-		pstmt.setString(1,mTime);
+		pstmt.setString(1,date);
 		pstmt.setString(2,par);
 		pstmt.setString(3,id);
-		pstmt.setString(4,"new");
+		pstmt.setString(4,"Create Information");
 
 		re = pstmt.executeQuery();
 
@@ -71,9 +74,9 @@
 %>
 		<script>
     	alert('추가되었습니다.');
-		alert(ShaPW);
-    	window.close(); 
 		</script>
 <%
 	}
+	response.sendRedirect("admin_main.jsp");
+
 %>  
