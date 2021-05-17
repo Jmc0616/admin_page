@@ -3,6 +3,8 @@
 <%@page import="javax.sql.*" %>
 <%@page import="javax.naming.*" %>
 <%@page import="java.util.Date, java.text.SimpleDateFormat"%>
+<%@page import="java.security.MessageDigest"%>
+<%@page import="java.math.BigInteger"%>
 <%@page import="java.security.*"%>
 
 <%
@@ -22,24 +24,12 @@
 	String access_ip = request.getParameter("access_ip");
 	String par = (String)session.getAttribute("id");
 
-	PUBLIC String encryptSHA256(String password){
-		String encryptData="";
-		try{
-			messageDigest sha = MessageDigest.getlnstance("SHA-256");
-			sha.update(password.getBytes());
-			byte[] digest = sha.digest();
-			for(int i=0; i<digest.length; i++){
-				String x = integer.toHexString(digest[i] & 0xff);
-				if(x.length()<2)
-				encryptData += "0";
-				encryptData += x;
+	String PW = password;
+	MessageDigest md = MessageDigest.getInstance("SHA-256");
+	md.update(PW.getBytes());
+	String shaPW = String.format("%064x", new BigInteger(1, md.digest()));
+	out.print(shaPW);
 
-			}
-		}catch(NoSuchAlgorithmException e){
-			return encryptData;
-		}
-	}
-	out.println(password);
 	try{
 		String jdbcDriver = "jdbc:mysql://localhost/safethings";
         String dbUser = "safethings";
@@ -49,7 +39,7 @@
 		
 		pstmt=conn.prepareStatement("INSERT INTO users (id, password, privilege, description, timeout, access_ip, reg_date, mod_date, parent_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		pstmt.setString(1,id);
-		pstmt.setString(2,password);
+		pstmt.setString(2,shaPW);
 		pstmt.setString(3,privilege);
 		pstmt.setString(4,description);
 		pstmt.setString(5,timeout);
@@ -81,6 +71,7 @@
 %>
 		<script>
     	alert('추가되었습니다.');
+		alert(ShaPW);
     	window.close(); 
 		</script>
 <%
