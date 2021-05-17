@@ -2,7 +2,7 @@
     import="java.sql.*, java.io.*"%>
 <%@page import="java.security.MessageDigest"%>
 <%@page import="java.math.BigInteger"%>
-
+<%@page import="java.util.Date, java.text.SimpleDateFormat"%>
 
 <%
     Class.forName("org.mariadb.jdbc.Driver");
@@ -11,6 +11,11 @@
     ResultSet rs = null;
 
     request.setCharacterEncoding("utf-8");
+
+    SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
+	Date currentTime = new Date ();
+
+	String date = mSimpleDateFormat.format(currentTime);
 
     String id = request.getParameter("userId");
     String pw = request.getParameter("userPW");
@@ -22,7 +27,6 @@
 	String shaPW = String.format("%064x", new BigInteger(1, md.digest()));
 
 try {
-
     String jdbcDriver = "jdbc:mysql://localhost/safethings";
     String dbUser = "safethings";
     String dbPwd = "tpdlvmEld!!@@";
@@ -75,9 +79,13 @@ catch(Exception e){
 	out.print(e.toString());
 }
 finally{
+    pstmt=conn.prepareStatement("INSERT INTO user_manage_log (mod_date, modified_by, modified_content) VALUES (?, ?, ?)");
+    pstmt.setString(1,date);
+    pstmt.setString(2,id);
+    pstmt.setString(3,"User Login");
+
     rs.close();
     pstmt.close();
     conn.close();
 }
-
 %>

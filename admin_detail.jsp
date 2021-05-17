@@ -1,15 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
     import="java.sql.*"%>
-<html>
-<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>사용자 정보</title>
-<title>Document</title>
-<script language="javascript">
-</script>
-</head> 
-<body>
-<tr>상세 정보</tr>
 
 <%
     Class.forName("org.mariadb.jdbc.Driver");
@@ -54,7 +45,8 @@
 
 <%
         }
-%>  </table>
+%> 
+</table>
 <%
         pstmt.close();
         conn.close();
@@ -65,8 +57,5 @@
        	out.print("Exception Error...");
 		out.print(e.toString());
     }
-    // response.sendRedirect("admin_main.jsp");
+    response.sendRedirect("admin_main.jsp");
 %>
-
-</body>
-</html>
