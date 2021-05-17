@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
     import="java.sql.*, java.io.*"%>
+<%@page import="java.security.MessageDigest"%>
+<%@page import="java.math.BigInteger"%>
+
 
 <%
     Class.forName("org.mariadb.jdbc.Driver");
@@ -12,6 +15,11 @@
     String id = request.getParameter("userId");
     String pw = request.getParameter("userPW");
     String ad = "admin";
+
+    String PW = pw;
+	MessageDigest md = MessageDigest.getInstance("SHA-256");
+	md.update(PW.getBytes());
+	String shaPW = String.format("%064x", new BigInteger(1, md.digest()));
 
 try {
 
@@ -34,7 +42,7 @@ try {
             </script>
             <%
         }
-        else if(!pw.equals(rs.getString("password"))){
+        else if(!shaPW.equals(rs.getString("password"))){
             %>
             <script>
             alert('비밀번호를 확인해주세요!');
