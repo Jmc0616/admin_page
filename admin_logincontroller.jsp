@@ -3,6 +3,7 @@
 <%@page import="java.security.MessageDigest"%>
 <%@page import="java.math.BigInteger"%>
 <%@page import="java.util.Date, java.text.SimpleDateFormat"%>
+<%@page import="java.net.InetAddress"%>
 
 <%
     Class.forName("org.mariadb.jdbc.Driver");
@@ -24,6 +25,9 @@
     String manage= "Policy Manager";
     String admin= "admin";
 
+    // ip
+    String ip = InetAddress.getLocalHost().getHostAddress();
+
     // login_limit
     String login = request.getParameter("login_limit");
 
@@ -39,7 +43,7 @@ try {
     String dbPwd = "tpdlvmEld!!@@";
 
     conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPwd);
-    pstmt = conn.prepareStatement("select id, password, privilege, login_limit from users where id='"+id+"'");
+    pstmt = conn.prepareStatement("select id, password, privilege, login_limit, access_ip from users where id='"+id+"'");
 
     rs = pstmt.executeQuery();
     rs.last();
@@ -50,6 +54,13 @@ try {
             %>
             <script>
             alert('아이디를 확인해주세요!');
+            </script>
+            <%
+        }
+        else if(!rs.getString("access_ip").equals(ip)) {
+            %>
+            <script>
+                alert('ID에 맞지 않는 IP주소입니다!!');
             </script>
             <%
         }
