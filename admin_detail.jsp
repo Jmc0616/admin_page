@@ -57,5 +57,4 @@
        	out.print("Exception Error...");
 		out.print(e.toString());
     }
-    response.sendRedirect("admin_main.jsp");
 %>

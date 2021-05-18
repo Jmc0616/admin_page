@@ -6,7 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<table width="50%" border="1">
+<table width="50%" border="1" >
     <tr>
         <th>아이디</th><th>설명</th><Th>기능</Th>
     </tr>

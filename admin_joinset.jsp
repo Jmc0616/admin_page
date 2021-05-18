@@ -32,14 +32,12 @@
 	Matcher matcher = pattern.matcher(password);
 	
 	if(matcher.find()) {
-		out.print(Integer.parseInt(password));
 	
 		// PW sha256
 		String PW = password;
 		MessageDigest md = MessageDigest.getInstance("SHA-256");
 		md.update(PW.getBytes());
 		String shaPW = String.format("%064x", new BigInteger(1, md.digest()));
-		out.print(shaPW);
 
 		try{
 			String jdbcDriver = "jdbc:mysql://localhost/safethings";
